@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model users {
+  id              String            @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email           String            @unique
+  password_hash   String
+  created_at      DateTime?         @default(now()) @db.Timestamp(6)
+  journal_entries journal_entries[]
+}
+
+model journal_entries {
+  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id            String               @db.Uuid
+  title              String?
+  content            String
+  mood               String?              @db.VarChar(50)
+  created_at         DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?            @default(now()) @db.Timestamp(6)
+  is_private         Boolean?             @default(true)
+  location           Json?
+  users              users                @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  journal_entry_tags journal_entry_tags[]
+  media              media[]
+  sync_logs          sync_logs[]
+}
+
+model journal_entry_tags {
+  entry_id        String          @db.Uuid
+  tag_id          String          @db.Uuid
+  journal_entries journal_entries @relation(fields: [entry_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  tags            tags            @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([entry_id, tag_id])
+}
+
+model media {
+  id              String           @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  entry_id        String?          @db.Uuid
+  url             String
+  type            String?          @db.VarChar(50)
+  metadata        Json?
+  uploaded_at     DateTime?        @default(now()) @db.Timestamp(6)
+  journal_entries journal_entries? @relation(fields: [entry_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model sync_logs {
+  id              String           @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  entry_id        String?          @db.Uuid
+  service         String           @db.VarChar(50)
+  status          String           @db.VarChar(20)
+  synced_at       DateTime?        @default(now()) @db.Timestamp(6)
+  journal_entries journal_entries? @relation(fields: [entry_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model tags {
+  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name               String               @unique
+  journal_entry_tags journal_entry_tags[]
+}
