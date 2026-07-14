@@ -1,0 +1,22 @@
+sequenceDiagram
+actor User
+participant UI
+participant BE
+participant PG as Postgres
+participant MQ as MessageQueue
+participant EM as Embedding Model
+participant VD as Vector Database
+
+User->>UI: Submit journal entry
+UI->>BE: POST journal-entry{id}
+BE->>Postgres: Save journal entry
+
+alt stored successfully
+    Postgres->>BE: Confirm entry saved
+    BE ->> UI: Success message
+    UI ->> User: Positive feedback
+else error
+    Postgres->>BE: Entry not saved
+    BE ->> UI: Error message
+    UI ->> User: Negative feedback
+end
