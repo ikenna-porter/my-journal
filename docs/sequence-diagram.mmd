@@ -9,14 +9,23 @@ participant VD as Vector Database
 
 User->>UI: Submit journal entry
 UI->>BE: POST journal-entry{id}
-BE->>Postgres: Save journal entry
+BE->>PG: Save journal entry
+
 
 alt stored successfully
-    Postgres->>BE: Confirm entry saved
+    PG -->>BE: Confirm entry saved
     BE ->> UI: Success message
     UI ->> User: Positive feedback
+    BE ->> MQ: Add journal entry to queue
+    MQ -->> BE: Worker picks up job
+    Note over BE: Worker performs chunking
+    BE ->> EM: Send chunks
+    EM -->> BE: Return vectors
+    BE ->> VD: Store embedding
+    VD -->> BE: Embedding stored
+    BE ->> MQ: Acknowledge job complete
 else error
-    Postgres->>BE: Entry not saved
+    PG -->>BE: Entry not saved
     BE ->> UI: Error message
     UI ->> User: Negative feedback
 end
