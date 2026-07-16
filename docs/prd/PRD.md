@@ -23,7 +23,24 @@ The app is a multimodal journaling platform that leverages AI to provide users w
 
 ---
 
-## 3. Features & User Flows
+## 3. User Stories
+
+| # | As a user, I want to... | So that... |
+|---|---|---|
+| 1 | Write free-form journal entries in Markdown without AI interruption | I can capture my thoughts honestly and privately |
+| 2 | Attach voice notes to my entries | I can record thoughts when typing feels unnatural |
+| 3 | Attach photos to my entries | I can document experiences visually alongside my written thoughts |
+| 4 | Have the AI surface meaningful observations after I write | I can discover connections to my past thoughts without searching for them myself |
+| 5 | Have my journal data encrypted and accessible only to me | I can write honestly without fear of exposure |
+| 6 | Initiate a conversation with the AI grounded in my full journal history | I can explore my thoughts deeply with context the AI has built up over time |
+| 7 | Close each AI conversation with a Collaborative Reflection | I have a permanent, distilled record of what was discussed and concluded |
+| 8 | Choose whether I or the AI writes the Collaborative Reflection | I retain authorship and control over what gets permanently saved |
+| 9 | Provide thumbs up/down feedback on AI observations | The system improves its relevance to me over time |
+| 10 | Search my past entries by meaning rather than keywords | I can find relevant entries even when I don't remember the exact words I used |
+
+---
+
+## 4. Features & User Flows
 
 ### 3.1 Journal Entry Composition
 - Users write free-form entries in **Markdown**
@@ -150,16 +167,46 @@ The app is a multimodal journaling platform that leverages AI to provide users w
 
 ---
 
-## 7. Build Phases
+## 7. Roadmap & Sprints
 
-### Phase 1 — Foundation
-Write entries, store in PostgreSQL, basic semantic search with pgvector, sentence-transformers embeddings, async ingestion pipeline via message queue.
+Planning period: July 15 – July 20
+Target completion: late August 2026
+Sprint duration: ~2 weeks each
 
-### Phase 2 — AI Layer
-Observation engine with confidence threshold, conversation mode with RAG, Collaborative Reflection, thumbs up/down feedback, similarity score storage.
+### Sprint 1 — Foundation (July 20 – August 3)
+Goal: A working journaling app with no AI. By end of sprint, entries can be written, saved, and retrieved.
 
-### Phase 3 — Media & Insights
-Voice note recording and Whisper transcription, photo attachments, timeline views, topic clustering, sentiment tracking over time.
+- Project setup — VPS provisioning, repo, CI/CD pipeline
+- Database setup — PostgreSQL with pgvector extension, schema migrations
+- User authentication — registration, login, session management, encryption at rest
+- Journal entry composition — Markdown editor, mood/energy tag, timestamp
+- Entry save flow — POST endpoint, PostgreSQL persistence, sub-500ms confirmation
+- Async ingestion pipeline — message queue setup, BE worker, chunking logic, sentence-transformers embeddings, vector storage in pgvector
+- Basic semantic search — embed a query, retrieve nearest chunks from pgvector
+
+### Sprint 2 — AI Layer (August 3 – August 17)
+Goal: The AI is alive. Observations surface, conversations happen, reflections are saved.
+
+- Observation engine — confidence threshold evaluation, similarity score storage, llm_observations table
+- Observation UI — surface 1-2 observations post-save, thumbs up/down feedback
+- Retrieval events table — log each vector DB query, scores, threshold outcome
+- Conversation mode — RAG retrieval pipeline, LLM context injection, real-time response
+- Path A and Path B conversation entry points
+- Collaborative Reflection — user or AI writes summary, appended to entry in PostgreSQL, embedded with ai_assisted:true metadata tag
+- Integration tests for ingestion and retrieval pipelines
+
+### Sprint 3 — Media & Polish (August 17 – August 26)
+Goal: Full v1 feature set. Voice, photos, tests passing, deployed and stable.
+
+- Voice note recording — MediaRecorder API in UI, open-source Whisper transcription, transcript flows through ingestion pipeline
+- Photo attachments — upload, store on VPS, display in entry view
+- HTTPS setup — TLS certificate via Let's Encrypt
+- Unit and integration test coverage to ≥ 85%
+- End-to-end testing of full user flows
+- Performance tuning — confirm 500ms save, 5s observation, 8s conversation targets
+- Deployment stability — uptime monitoring, embedding job retry logic confirmed
+- Bug fixes and UX polish
+
 
 ---
 
