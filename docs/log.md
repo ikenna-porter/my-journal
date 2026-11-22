@@ -2,6 +2,7 @@
 
 ## 2026-11-22
 
+* **Update**: Slice 0 decisions recorded: API contract conventions (new decision `api-contract-conventions.md`). Entries gain an optional title (PRD 3.1). Methodology rules now live in `openspec/config.yaml` (development-methodology). Resolved the open items in the roadmap's slice 0 and in frontend-react-typescript.
 * **Created**: Root `CLAUDE.md` with working rules for every session (read-first list, precedence, vocabulary, methodology, privacy, git).
 * **Created**: `product/roadmap.md`, covering the API contract and five vertical slices with hands-on scores. Added the hands-on scale and the learn-then-hand-off rule to `development-methodology.md`.
 * **Update**: Development methodology recorded: contract first, vertical slices, TDD, hands-on scores (new decision `development-methodology.md`).

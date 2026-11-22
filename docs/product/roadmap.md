@@ -47,7 +47,7 @@ sources:
 
 * **Scope:** every v1 endpoint designed up front, covering request, response, errors and auth: entries, search, observations and feedback, conversations and messages, reflections, deletion. Includes a FastAPI skeleton whose stub endpoints match the spec, TypeScript types generated from the OpenAPI schema, and contract tests.
 * **Brings in:** the FastAPI project, Pydantic schemas, OpenAPI type generation for React.
-* **Open:** how the OpenSpec config encodes the methodology rules (see [Development methodology](../decisions/development-methodology.md)); streaming format for conversation responses (for example server-sent events).
+* **Decided:** methodology rules live in `openspec/config.yaml` (see [Development methodology](../decisions/development-methodology.md)). Observations are polled and conversation replies stream over server-sent events (see [API contract conventions](../decisions/api-contract-conventions.md)). Planned as the OpenSpec change `api-contract`.
 
 ## 1. Entries
 

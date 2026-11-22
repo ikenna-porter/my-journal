@@ -70,6 +70,7 @@ The app is a multimodal journaling platform that leverages AI to provide users w
 - **v1 entries are text only.** Attachments move to v2 ([decision](../decisions/media-deferred-to-v2.md)):
   - **Voice notes (v2)** — transcribed automatically via open-source Whisper (self-hosted, zero per-call cost)
   - **Photos (v2)** — attached and displayed (AI vision also v2)
+- Optional title ([decision](../decisions/api-contract-conventions.md))
 - Optional metadata: mood/energy tag, timestamp (auto-set; the user can change it **while writing**, for example to backdate, but it's fixed once saved — [decision](../decisions/entry-immutability-and-deletion.md))
 - Entries are saved to **PostgreSQL** as the source of truth
 - **Entries are immutable.** Once saved, an entry can't be edited, only deleted ([decision](../decisions/entry-immutability-and-deletion.md))

@@ -20,6 +20,6 @@ The frontend is written in **TypeScript** with **React**.[^ike-2026-11-22] This 
 
 # Consequences
 
-* The frontend will talk to the new [Python + FastAPI backend](backend-python-fastapi.md) over HTTP. Types for the API could be generated from FastAPI's OpenAPI schema, which hasn't been decided yet.
+* The frontend will talk to the new [Python + FastAPI backend](backend-python-fastapi.md) over HTTP. API types are generated with `openapi-typescript` from the committed `contract/openapi.json`, which FastAPI generates (see [API contract conventions](api-contract-conventions.md)).
 
 [^ike-2026-11-22]: Ike: "the FE should ofc be in typescript. we can use react for it."

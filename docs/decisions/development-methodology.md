@@ -55,10 +55,11 @@ Every piece of code Claude writes, at every level, comes with an explanation siz
 
 The slice score sets the overall emphasis, and each task's score is what applies in practice. Harness, retrieval, tracing and eval work scores 4 or 5. React UI, Docker, deployment and config score 1 or 2. Ike can override any score.
 
-# Open
+# In OpenSpec
 
-* How these rules are written into OpenSpec, for example as rules in `openspec/config.yaml` so every proposal and task list carries scores and puts tests first. Decide this at the start of slice 0.
+Decided at the start of slice 0: the rules live as `context` and per-artifact `rules` in `openspec/config.yaml`, so every proposal and task list states its scores, puts a failing-test task before each code task and marks the hand-off at 4 and 5.[^openspec]
 
 [^ike-2026-11-22]: Ike: "I prefer to divide the app into vertical slices... before the vertical slices can be written, [I] prefer to do a contract-first approach... it's also important that we leverage TDD for all code written... each slice and task within the slice will get a score from 1-5... the goal being to actually have me develop code for tasks that are very marketable for AI engineering/BE roles."
 [^scale]: Ike accepted the proposed 1 to 5 scale ("sure, this works for me").
 [^handoff]: Ike: "i don't want to write most of the code... i don't want to have to write everything for scores of 4 or 5 even... maybe i can start by writing the code for all 4s and 5s, but once i've gotten a hang of it, i can delegate AI to write the rest of it for that task."
+[^openspec]: Ike chose config.yaml rules over a custom OpenSpec schema or no encoding (2026-11-22).

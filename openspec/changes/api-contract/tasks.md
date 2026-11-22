@@ -15,16 +15,16 @@ Your personal work is concentrated in **3.2, 4.1 to 4.3, 5.2, 6.2, 7.2 and 8.2**
 
 ## 1. Record the decisions
 
-- [ ] 1.1 [score 1] **🤖 Claude:** Write `docs/decisions/api-contract-conventions.md` (OKF, `type: Decision`) covering D1 to D7 in design.md, with footnotes quoting Ike's choices. Verify the frontmatter has `type`, `title`, `description`, `status` and `generated`
-- [ ] 1.2 [score 1] **🤖 Claude:** Update PRD 3.1 to list the optional entry title, linking the new decision. Resolve the "Open" items in `development-methodology.md` (config.yaml rules), `roadmap.md` slice 0 (streaming format) and `frontend-react-typescript.md` (type generation). Verify no "Open" item about these remains
-- [ ] 1.3 [score 1] **🤖 Claude:** Add the new doc to `docs/index.md` and a dated entry at the top of `docs/log.md`. Verify both links resolve
+- [x] 1.1 [score 1] **🤖 Claude:** Write `docs/decisions/api-contract-conventions.md` (OKF, `type: Decision`) covering D1 to D7 in design.md, with footnotes quoting Ike's choices. Verify the frontmatter has `type`, `title`, `description`, `status` and `generated`
+- [x] 1.2 [score 1] **🤖 Claude:** Update PRD 3.1 to list the optional entry title, linking the new decision. Resolve the "Open" items in `development-methodology.md` (config.yaml rules), `roadmap.md` slice 0 (streaming format) and `frontend-react-typescript.md` (type generation). Verify no "Open" item about these remains
+- [x] 1.3 [score 1] **🤖 Claude:** Add the new doc to `docs/index.md` and a dated entry at the top of `docs/log.md`. Verify both links resolve
 
 ## 2. Backend skeleton
 
-- [ ] 2.1 [score 1] **🤖 Claude:** Create `backend/` with uv (Python 3.13, FastAPI, Pydantic v2, pytest, httpx, ruff) and verify `uv run pytest` runs with no tests collected
-- [ ] 2.2 [score 1] **🤖 Claude:** Write the failing test `tests/conventions/test_health.py` (`GET /api/v1/health` gives `200 {"status": "ok"}` without a token) and verify it fails
-- [ ] 2.3 [score 1] **🤖 Claude:** Add `create_app()` with the `/api/v1` router and the health route, and verify 2.2 passes
-- [ ] 2.4 [score 1] **🤖 Claude:** Explain what Claude wrote in group 2 (short summary)
+- [x] 2.1 [score 1] **🤖 Claude:** Create `backend/` with uv (Python 3.13, FastAPI, Pydantic v2, pytest, httpx, ruff) and verify `uv run pytest` runs with no tests collected
+- [x] 2.2 [score 1] **🤖 Claude:** Write the failing test `tests/conventions/test_health.py` (`GET /api/v1/health` gives `200 {"status": "ok"}` without a token) and verify it fails
+- [x] 2.3 [score 1] **🤖 Claude:** Add `create_app()` with the `/api/v1` router and the health route, and verify 2.2 passes
+- [x] 2.4 [score 1] **🤖 Claude:** Explain what Claude wrote in group 2 (short summary)
 
 ## 3. Conventions: errors, auth stub, pagination, stubs
 
