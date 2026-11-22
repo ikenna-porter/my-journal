@@ -1,32 +1,34 @@
 schema: spec-driven
 
-# Project context (optional)
-# Add only constraints that should guide OpenSpec artifacts and workflows.
-# Include constraints an agent cannot infer by reading the code.
-# Keep general project documentation and discoverable codebase facts out.
-# Example:
-#   context: |
-#     Designs and tasks must cover Windows, macOS, and Linux
-#     Write all artifacts in Spanish
+# Project context: constraints every OpenSpec artifact must follow.
+context: |
+  Follow docs/decisions/development-methodology.md: contract first, vertical slices,
+  TDD for all code, and a 1-5 hands-on score on every slice and task.
+  Use docs/product/glossary.md terms exactly (conversation, never "chat";
+  Observation Reply / Direct Conversation, never "Path A/B"; Collaborative Reflection, never "summary").
+  Decision docs in docs/decisions/ override docs/product/prd.md.
+  High-level design decisions (technology, data model, API design, harness shape,
+  what goes into context) belong to Ike; code-level details are Claude's call.
+  The backend is Python + FastAPI + SQLAlchemy/Alembic; do not build on the Express code in server/.
+  Never commit real journal entries; evals use a synthetic journal only.
+  Never log raw entry text outside the LLM provider and self-hosted Langfuse.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always state what is out of scope
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
-
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+rules:
+  proposal:
+    - State the change's hands-on score (1-5) and the AI engineering or backend skills it teaches
+    - Name the roadmap slice it implements (docs/product/roadmap.md)
+  design:
+    - List high-level decisions still open for Ike as Open Questions, each with options, trade-offs and a recommendation
+    - For each decision Ike already made, cite the docs/decisions/ doc that records it (or a task to write it)
+    - State how the deletion cascade is extended or affected by this change
+  specs:
+    - Use glossary terms in every requirement and scenario
+    - Every requirement that touches user data states that it is scoped to the authenticated user
+  tasks:
+    - Tag every task with its hands-on score, e.g. "[score 4]"
+    - Put a failing-test task immediately before every task that writes code (TDD)
+    - For score 4-5 tasks, split into "Ike writes the core" and "Claude finishes after Ike says take over" sub-tasks
+    - At score 5 Ike writes the tests too; at score 4 Claude writes the failing tests and Ike agrees they describe the right behavior
+    - Include a task to explain the code Claude writes, sized to its score (summary at 1, line-by-line at 2+)
+    - Include tasks to record new key decisions in docs/decisions/, docs/index.md and docs/log.md
+    - End with an end-to-end verification task; the next slice must not start until it passes
