@@ -2,6 +2,9 @@
 
 ## 2026-11-22
 
+* **Created**: Root `CLAUDE.md` with working rules for every session (read-first list, precedence, vocabulary, methodology, privacy, git).
+* **Created**: `product/roadmap.md`, covering the API contract and five vertical slices with hands-on scores. Added the hands-on scale and the learn-then-hand-off rule to `development-methodology.md`.
+* **Update**: Development methodology recorded: contract first, vertical slices, TDD, hands-on scores (new decision `development-methodology.md`).
 * **Update**: Authentication changed from WorkOS AuthKit to Auth0, for resume recognition (authentication).
 * **Update**: Authentication decided: a hosted provider with the largest free tier, WorkOS AuthKit (new decision `authentication.md`).
 * **Update**: Database access decided: SQLAlchemy 2.0 + Alembic, with raw SQL for retrieval (new decision `database-access.md`).

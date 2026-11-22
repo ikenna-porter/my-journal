@@ -4,9 +4,14 @@ title: my-journal documentation
 description: Architecture, decisions and planning notes for my-journal, a journaling app with an AI (RAG + agent) layer over the user's own entries.
 ---
 
+# Working rules
+
+* [CLAUDE.md](../CLAUDE.md) - How every Claude session works in this repo: what to read first, which doc wins, vocabulary, methodology, privacy and git.
+
 # Product
 
 * [PRD v1](product/prd.md) - Product requirements for v1, the source of truth for features and user flows (Observation Mode, Conversation Mode, Collaborative Reflection). v1 is text-only; media is v2.
+* [v1 roadmap - API contract, then vertical slices](product/roadmap.md) - The build order for v1. Slice 0 designs the API contract, then five vertical slices are built end to end. Each slice lists its hands-on score, the AI engineering skills it teaches, and its open questions. Each slice is one OpenSpec change.
 * [Glossary](product/glossary.md) - The canonical product vocabulary. Every doc, spec, UI label and code identifier uses these terms and no synonyms.
 
 # Architecture
@@ -45,6 +50,7 @@ description: Architecture, decisions and planning notes for my-journal, a journa
 
 ## Process decisions
 
+* [Development methodology: contract first, vertical slices, TDD, hands-on scores](decisions/development-methodology.md) - The API contract is designed first. Features are then built as end-to-end vertical slices, all code is test-driven, and every slice and task gets a 1 to 5 hands-on score for how much of it Ike writes himself.
 * [Documentation format: Open Knowledge Format](decisions/documentation-okf.md) - All docs in this directory follow Google's Open Knowledge Format (OKF) v0.3.
 * [Planning workflow: OpenSpec](decisions/planning-openspec.md) - Features are planned as OpenSpec changes (proposal, design, specs, tasks) before implementation.
 
